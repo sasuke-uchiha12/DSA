@@ -70,6 +70,11 @@ class product {   //by default all the attribules and methods are private
     //destructor
     ~product(){
         cout << "deleting: " << name << endl;
+        //deleting name char with was initialised via dynamic memory allocation
+        if(name != NULL){
+            delete [] name;
+            name = NULL;
+        }
     }
 
 };
