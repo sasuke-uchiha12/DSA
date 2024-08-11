@@ -11,6 +11,7 @@ int main() {
     l.searchRecursive(head, 2, 0);
     l.search(2);
     l.display();
-
+    l.reverseList();
+    l.display();
     return 0;
 }

@@ -25,6 +25,20 @@ class Link{
         return head;
     }
 
+    //destructor
+    ~Link(){
+        Node * temp = head;
+        if(temp != nullptr){
+            while(temp != nullptr){
+                Node *nextNode = temp->next;
+                delete temp;
+                temp = nextNode; 
+            }
+            cout << "destructor is called!" << endl;
+        }
+        head = tail = nullptr; //if not it may cause dangling pointer, double deletion
+    }
+
     void push_front(int data){
         if(head == nullptr){
             Node *n = new Node(data);
@@ -108,5 +122,48 @@ class Link{
         else{
             return searchRecursive(temp->next, key, idx + 1);
         }
+    }
+
+    //pop front
+    void pop_front(){
+        Node *temp = head;
+        if(temp == nullptr){
+            cout << "Linked List is empty!" << endl;
+            return;
+        }
+        if(temp != nullptr){
+            delete head;
+            // head = temp->next;
+            if(temp->next == nullptr){
+                head = tail = nullptr;
+            }else{
+                head = temp->next;
+            }
+        }
+    
+    }
+
+    //Reverse a linked list
+    void reverseList(){
+        if(head == nullptr){
+            return;
+        }
+        if(head->next == nullptr){
+            tail = head;
+        }
+
+        Node * current = head;
+        Node * prev = nullptr;
+        Node * next = nullptr;
+
+        tail = head;
+
+        while(current != nullptr){
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
 };
